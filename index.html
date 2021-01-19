@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+	
+	<script>
+		
+		// var body=document.querySelector('body');
+		// body.lcEvent('ss',alert(11));
+		// body.emit(ss);
+		
+		var lcEvent={
+			event:{
+				
+			},
+			addEvent:function(nameEvent,fn){
+				if(this.event[nameEvent]==undefined){
+					this.event[nameEvent]=[]
+				}
+				this.event[nameEvent].push(fn);
+			},
+			emit:function(nameEvent,eventMsg){
+				var fnList=this.event[nameEvent];
+				fnList.forEach(function(item,i){
+					item(eventMsg);
+				})
+			},
+			removeEvent:function(nameEvent,fn){
+				var fnList=this.event[nameEvent];
+				var that=this;
+				fnList.forEach(function(item,i){
+					if(fn==item){
+						that.event[nameEvent].splice(i,1);
+				    }
+				})
+				
+			}
+		}
+		var aa=function(eventMsg){
+			console.log(eventMsg);
+			console.log('11')}
+			
+		lcEvent.addEvent('演出',aa)
+		
+		lcEvent.addEvent('演出',function(eventMsg){
+			console.log(eventMsg);
+			console.log('22')
+		})
+		lcEvent.removeEvent('演出',aa)
+		lcEvent.emit('演出','dj')
+		
+	</script>	
+	</body>
+	
+</html>
