@@ -4,54 +4,32 @@
 		<meta charset="utf-8" />
 		<title></title>
 	</head>
-	<body>
-	
-	<script>
-		
-		// var body=document.querySelector('body');
-		// body.lcEvent('ss',alert(11));
-		// body.emit(ss);
-		
-		var lcEvent={
-			event:{
-				
-			},
-			addEvent:function(nameEvent,fn){
-				if(this.event[nameEvent]==undefined){
-					this.event[nameEvent]=[]
-				}
-				this.event[nameEvent].push(fn);
-			},
-			emit:function(nameEvent,eventMsg){
-				var fnList=this.event[nameEvent];
-				fnList.forEach(function(item,i){
-					item(eventMsg);
-				})
-			},
-			removeEvent:function(nameEvent,fn){
-				var fnList=this.event[nameEvent];
-				var that=this;
-				fnList.forEach(function(item,i){
-					if(fn==item){
-						that.event[nameEvent].splice(i,1);
-				    }
-				})
-				
-			}
-		}
-		var aa=function(eventMsg){
-			console.log(eventMsg);
-			console.log('11')}
+	<style>
+		canvas{
 			
-		lcEvent.addEvent('演出',aa)
+			border: 1px solid red;
+		}
+	</style>
+	<body>
+		<canvas id="canvas" ></canvas>
+		<img src="img/timg.jpg" id="img"/>
+	<script>
+		var _c=document.querySelector('#canvas');
+		_c.width=100;
+		_c.height= 200;
+		var ctx=_c.getContext('2d');
+		// var a=document.getElementById('img')
+		// ctx.clearRect(0,0,500,700);
+		// ctx.beginPath();
+		var imga=new Image();
+		imga.src="./img/timg.jpg";
+		// 无论如何都要加onload方法，要不然出不来图片
+		imga.onload=function(){
+			ctx.drawImage(imga,0,0,100,200);
+		}
 		
-		lcEvent.addEvent('演出',function(eventMsg){
-			console.log(eventMsg);
-			console.log('22')
-		})
-		lcEvent.removeEvent('演出',aa)
-		lcEvent.emit('演出','dj')
 		
+		  
 	</script>	
 	</body>
 	
